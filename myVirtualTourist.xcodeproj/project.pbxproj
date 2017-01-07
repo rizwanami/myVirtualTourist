@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360654B01E2090E10020F434 /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360654AF1E2090E10020F434 /* CoreDataStackManager.swift */; };
 		36CBE4C31E20094C00B85D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE4C21E20094C00B85D56 /* AppDelegate.swift */; };
 		36CBE4C51E20094C00B85D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE4C41E20094C00B85D56 /* ViewController.swift */; };
 		36CBE4C81E20094D00B85D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36CBE4C61E20094D00B85D56 /* Main.storyboard */; };
@@ -14,6 +15,11 @@
 		36CBE4CD1E20094D00B85D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36CBE4CB1E20094D00B85D56 /* LaunchScreen.storyboard */; };
 		36CBE4D81E20094E00B85D56 /* myVirtualTouristTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE4D71E20094E00B85D56 /* myVirtualTouristTests.swift */; };
 		36CBE4E31E20094E00B85D56 /* myVirtualTouristUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE4E21E20094E00B85D56 /* myVirtualTouristUITests.swift */; };
+		36CBE4F51E20176C00B85D56 /* vtDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE4F31E20176C00B85D56 /* vtDataModel.xcdatamodeld */; };
+		36CBE5371E20332C00B85D56 /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE5331E20332C00B85D56 /* Pin+CoreDataClass.swift */; };
+		36CBE5381E20332C00B85D56 /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE5341E20332C00B85D56 /* Pin+CoreDataProperties.swift */; };
+		36CBE5391E20332C00B85D56 /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE5351E20332C00B85D56 /* Photo+CoreDataClass.swift */; };
+		36CBE53A1E20332C00B85D56 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CBE5361E20332C00B85D56 /* Photo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		360654AF1E2090E10020F434 /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackManager.swift; sourceTree = "<group>"; };
 		36CBE4BF1E20094C00B85D56 /* myVirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myVirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CBE4C21E20094C00B85D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		36CBE4C41E20094C00B85D56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +54,11 @@
 		36CBE4DE1E20094E00B85D56 /* myVirtualTouristUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = myVirtualTouristUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CBE4E21E20094E00B85D56 /* myVirtualTouristUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myVirtualTouristUITests.swift; sourceTree = "<group>"; };
 		36CBE4E41E20094E00B85D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36CBE4F41E20176C00B85D56 /* vtDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = vtDataModel.xcdatamodel; sourceTree = "<group>"; };
+		36CBE5331E20332C00B85D56 /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		36CBE5341E20332C00B85D56 /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		36CBE5351E20332C00B85D56 /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		36CBE5361E20332C00B85D56 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +109,9 @@
 		36CBE4C11E20094C00B85D56 /* myVirtualTourist */ = {
 			isa = PBXGroup;
 			children = (
-				36CBE4C21E20094C00B85D56 /* AppDelegate.swift */,
-				36CBE4C41E20094C00B85D56 /* ViewController.swift */,
-				36CBE4C61E20094D00B85D56 /* Main.storyboard */,
-				36CBE4C91E20094D00B85D56 /* Assets.xcassets */,
-				36CBE4CB1E20094D00B85D56 /* LaunchScreen.storyboard */,
-				36CBE4CE1E20094D00B85D56 /* Info.plist */,
+				36CBE4F21E20170400B85D56 /* Controller */,
+				36CBE4F11E2016FC00B85D56 /* View */,
+				36CBE4F01E2016F400B85D56 /* Model */,
 			);
 			path = myVirtualTourist;
 			sourceTree = "<group>";
@@ -123,6 +132,39 @@
 				36CBE4E41E20094E00B85D56 /* Info.plist */,
 			);
 			path = myVirtualTouristUITests;
+			sourceTree = "<group>";
+		};
+		36CBE4F01E2016F400B85D56 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				36CBE5331E20332C00B85D56 /* Pin+CoreDataClass.swift */,
+				36CBE5341E20332C00B85D56 /* Pin+CoreDataProperties.swift */,
+				36CBE5351E20332C00B85D56 /* Photo+CoreDataClass.swift */,
+				36CBE5361E20332C00B85D56 /* Photo+CoreDataProperties.swift */,
+				36CBE4F31E20176C00B85D56 /* vtDataModel.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		36CBE4F11E2016FC00B85D56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				36CBE4C61E20094D00B85D56 /* Main.storyboard */,
+				36CBE4C91E20094D00B85D56 /* Assets.xcassets */,
+				36CBE4CB1E20094D00B85D56 /* LaunchScreen.storyboard */,
+				36CBE4CE1E20094D00B85D56 /* Info.plist */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		36CBE4F21E20170400B85D56 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				36CBE4C21E20094C00B85D56 /* AppDelegate.swift */,
+				36CBE4C41E20094C00B85D56 /* ViewController.swift */,
+				360654AF1E2090E10020F434 /* CoreDataStackManager.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,7 +301,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36CBE53A1E20332C00B85D56 /* Photo+CoreDataProperties.swift in Sources */,
+				360654B01E2090E10020F434 /* CoreDataStackManager.swift in Sources */,
+				36CBE5391E20332C00B85D56 /* Photo+CoreDataClass.swift in Sources */,
 				36CBE4C51E20094C00B85D56 /* ViewController.swift in Sources */,
+				36CBE5371E20332C00B85D56 /* Pin+CoreDataClass.swift in Sources */,
+				36CBE4F51E20176C00B85D56 /* vtDataModel.xcdatamodeld in Sources */,
+				36CBE5381E20332C00B85D56 /* Pin+CoreDataProperties.swift in Sources */,
 				36CBE4C31E20094C00B85D56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,6 +551,7 @@
 				36CBE4E91E20094E00B85D56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		36CBE4EA1E20094E00B85D56 /* Build configuration list for PBXNativeTarget "myVirtualTouristTests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +560,7 @@
 				36CBE4EC1E20094E00B85D56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		36CBE4ED1E20094E00B85D56 /* Build configuration list for PBXNativeTarget "myVirtualTouristUITests" */ = {
 			isa = XCConfigurationList;
@@ -519,8 +569,22 @@
 				36CBE4EF1E20094E00B85D56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		36CBE4F31E20176C00B85D56 /* vtDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				36CBE4F41E20176C00B85D56 /* vtDataModel.xcdatamodel */,
+			);
+			currentVersion = 36CBE4F41E20176C00B85D56 /* vtDataModel.xcdatamodel */;
+			path = vtDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 36CBE4B71E20094C00B85D56 /* Project object */;
 }
