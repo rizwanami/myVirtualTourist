@@ -18,7 +18,7 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
     var isInitRegionSet = false
 
     // MARK: - Instance Variables
-    lazy var fetchedResultsController: NSFetchedResultsController<Pin> = { () -> NSFetchedResultsController<Pin> in
+    lazy var frcPin: NSFetchedResultsController<Pin> = { () -> NSFetchedResultsController<Pin> in
         
         let fetchRequest = NSFetchRequest<Pin>(entityName: "Pin")
         fetchRequest.sortDescriptors = []
@@ -48,13 +48,13 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
 
         //Load the Pins
         do {
-            try fetchedResultsController.performFetch()
+            try frcPin.performFetch()
         } catch {
             print("testing")
         }
         
-        if let count = fetchedResultsController.fetchedObjects?.count {
-            for pin in fetchedResultsController.fetchedObjects! {
+        if let count = frcPin.fetchedObjects?.count {
+            for pin in frcPin.fetchedObjects! {
                 self.addAnnotationToMap(lon: pin.lon, lat: pin.lat)
             }
         }
@@ -118,7 +118,7 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
             self.mapView.addAnnotation(annotation)
             
             //Persist the Pin
-            let newPin :Pin = Pin(lon: annotation.coordinate.longitude, lat: annotation.coordinate.longitude, title: "test", context: sharedContext)
+            let newPin :Pin = Pin(lon: annotation.coordinate.longitude, lat: annotation.coordinate.latitude, title: "test", context: sharedContext)
             sharedContext.insert(newPin)
             
             CoreDataStackManager.sharedInstance().saveContext()
