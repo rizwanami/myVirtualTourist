@@ -31,11 +31,69 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="dXx-aR-7H2" id="Waj-FG-KQd"/>
+                        <segue destination="Z8q-tk-w5u" kind="presentation" identifier="photoCollection" id="2Vw-8d-Z2B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="107.49625187406298"/>
+        </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="s7b-Ir-oV0">
+            <objects>
+                <viewController id="Z8q-tk-w5u" customClass="PhotoViewController" customModule="myVirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PDN-K5-QWz"/>
+                        <viewControllerLayoutGuide type="bottom" id="dav-fV-X36"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mie-CE-fqe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-OX-KT7">
+                                <connections>
+                                    <outlet property="delegate" destination="mie-CE-fqe" id="Imu-tc-WlA"/>
+                                </connections>
+                            </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jCp-U9-Bpp">
+                                <color key="backgroundColor" red="0.58055763090000001" green="0.91886561879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wzd-6x-pBu">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewCell" id="LAu-Jf-eUQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="mie-CE-fqe" id="S1S-vM-oHe"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cik-OX-KT7" firstAttribute="top" secondItem="PDN-K5-QWz" secondAttribute="bottom" id="8kE-fb-x3u"/>
+                            <constraint firstItem="Cik-OX-KT7" firstAttribute="leading" secondItem="mie-CE-fqe" secondAttribute="leadingMargin" id="EUB-xJ-svV"/>
+                            <constraint firstItem="jCp-U9-Bpp" firstAttribute="top" secondItem="PDN-K5-QWz" secondAttribute="bottom" constant="124" id="HlC-2h-o2L"/>
+                            <constraint firstItem="Cik-OX-KT7" firstAttribute="trailing" secondItem="mie-CE-fqe" secondAttribute="trailingMargin" id="ILg-SP-Au9"/>
+                            <constraint firstItem="dav-fV-X36" firstAttribute="top" secondItem="jCp-U9-Bpp" secondAttribute="bottom" id="Ssa-xg-fPk"/>
+                            <constraint firstItem="jCp-U9-Bpp" firstAttribute="trailing" secondItem="mie-CE-fqe" secondAttribute="trailingMargin" id="cD3-gD-omX"/>
+                            <constraint firstItem="jCp-U9-Bpp" firstAttribute="leading" secondItem="mie-CE-fqe" secondAttribute="leadingMargin" id="deD-Q8-yja"/>
+                            <constraint firstItem="dav-fV-X36" firstAttribute="top" secondItem="Cik-OX-KT7" secondAttribute="bottom" constant="518" id="gAf-pJ-yIR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m2d-ID-mTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079.2" y="136.28185907046478"/>
         </scene>
     </scenes>
 </document>

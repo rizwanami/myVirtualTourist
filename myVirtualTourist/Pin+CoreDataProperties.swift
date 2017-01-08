@@ -2,7 +2,7 @@
 //  Pin+CoreDataProperties.swift
 //  myVirtualTourist
 //
-//  Created by Mohammed Ibrahim on 1/6/17.
+//  Created by Mohammed Ibrahim on 1/8/17.
 //  Copyright © 2017 myw. All rights reserved.
 //
 
@@ -15,8 +15,8 @@ extension Pin {
         return NSFetchRequest<Pin>(entityName: "Pin");
     }
 
-    @NSManaged public var lon: Double
     @NSManaged public var lat: Double
+    @NSManaged public var lon: Double
     @NSManaged public var title: String?
     @NSManaged public var photo: NSSet?
 

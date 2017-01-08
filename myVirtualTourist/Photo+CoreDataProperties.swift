@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  myVirtualTourist
 //
-//  Created by Mohammed Ibrahim on 1/6/17.
+//  Created by Mohammed Ibrahim on 1/8/17.
 //  Copyright © 2017 myw. All rights reserved.
 //
 
@@ -16,8 +16,12 @@ extension Photo {
     }
 
     @NSManaged public var image: NSData?
+    @NSManaged public var photoTitle: String?
     @NSManaged public var url: String?
-    @NSManaged public var title: String?
+    @NSManaged public var id: String?
+    @NSManaged public var secret: String?
+    @NSManaged public var serverId: String?
+    @NSManaged public var farmId: String?
     @NSManaged public var pin: Pin?
 
 }

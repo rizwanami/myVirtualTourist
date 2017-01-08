@@ -92,8 +92,26 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
     
     //Pin is Tapped/Selected
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+
+        let pinPred = NSPredicate(format: "lon == %lf AND lat == %lf ",(view.annotation?.coordinate.longitude)!,(view.annotation?.coordinate.latitude)!)
+
         
-        //Set the Pin property in PhotoViewController
+        frcPin.fetchRequest.predicate = pinPred
+        
+        do {
+            try frcPin.performFetch()
+        } catch {
+            print(error)
+        }
+        
+        for newPin in (frcPin.fetchedObjects)! {
+            //Set the Current Pin selection
+            Common.shared.currentPin?.selectedPin = newPin
+            performSegue(withIdentifier: "photoCollection", sender: self)
+            return
+        }
+            
+        
         
         //Transition to the PhotoViewController
         
@@ -106,6 +124,8 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
 
     //  action for tapnHold:
     func didDelayedTap(gestureRecognizer: UILongPressGestureRecognizer) {
+        
+        let client : FlickrClient = FlickrClient()
         
         // Here touch began and user has to hold it for require time (the time limit is assign in viewDidLoad in tapnHold.miniumPressDuration.
         if gestureRecognizer.state == UIGestureRecognizerState.began {
@@ -121,7 +141,22 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
             let newPin :Pin = Pin(lon: annotation.coordinate.longitude, lat: annotation.coordinate.latitude, title: "test", context: sharedContext)
             sharedContext.insert(newPin)
             
-            CoreDataStackManager.sharedInstance().saveContext()
+            //Get Photos for Pin
+            client.FetchPhotosForPin(pin: newPin) {
+                (data, error) in
+                if error != nil {
+                   print("error fetching the Photos")
+                   return
+                }
+                for photo in data! {
+                    let newPhoto = Photo(id: photo["id"] as! String, farmId: "\(photo["farm"])" as! String, secret: photo["secret"] as! String, serverId: photo["server"] as! String, title: photo["title"] as! String, context: self.sharedContext)
+
+                    //Add new photo to pin
+                    newPin.addToPhoto(newPhoto)
+                }
+                //Save Photos in Pin
+                CoreDataStackManager.sharedInstance().saveContext()
+            }
             
         }
     }
