@@ -58,19 +58,33 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jCp-U9-Bpp">
                                 <color key="backgroundColor" red="0.58055763090000001" green="0.91886561879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wzd-6x-pBu">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="111" height="108"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewCell" id="LAu-Jf-eUQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="collectionViewCell" id="LAu-Jf-eUQ" customClass="FlickrImageCell" customModule="myVirtualTourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="111" height="108"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="111" height="108"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ByX-tp-1yh">
+                                                    <frame key="frameInset" minX="45" minY="44" width="20" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </activityIndicatorView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Piy-3d-dDF">
+                                                    <frame key="frameInset" minY="8" width="111" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
+                                        <connections>
+                                            <outlet property="FlickrImage" destination="Piy-3d-dDF" id="YAQ-8x-njp"/>
+                                            <outlet property="actCell" destination="ByX-tp-1yh" id="asY-bs-a2c"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -90,6 +104,10 @@
                             <constraint firstItem="dav-fV-X36" firstAttribute="top" secondItem="Cik-OX-KT7" secondAttribute="bottom" constant="518" id="gAf-pJ-yIR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="Cik-OX-KT7" id="aeP-W3-96X"/>
+                        <outlet property="photoCollView" destination="jCp-U9-Bpp" id="ti5-OU-Xrx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m2d-ID-mTH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

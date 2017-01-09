@@ -9,12 +9,15 @@
 import UIKit
 
 import CoreData
+import MapKit
 
 
-class PhotoViewController : UICollectionViewController, NSFetchedResultsControllerDelegate {
-    
+class PhotoViewController : UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, MKMapViewDelegate {
+
+    @IBOutlet var mapView: MKMapView!
     @IBOutlet var photoCollView: UICollectionView!
     
+    @IBOutlet var cellActivity: UIActivityIndicatorView!
     let reuseIdentifier = "collectionViewCell"
     
     fileprivate let itemsPerRow: CGFloat = 3
@@ -26,7 +29,7 @@ class PhotoViewController : UICollectionViewController, NSFetchedResultsControll
     
 
     lazy var frcPin: NSFetchedResultsController<Photo> = { () -> NSFetchedResultsController<Photo> in
-        let myPin = Common.shared.currentPin?.selectedPin
+        let myPin = Common.shared.currentPin
         let fetchRequest = NSFetchRequest<Photo>(entityName: "Photo")
         fetchRequest.sortDescriptors = []
         
@@ -39,6 +42,13 @@ class PhotoViewController : UICollectionViewController, NSFetchedResultsControll
 
     override func viewDidLoad() {
         super.viewDidLoad()        
+       mapView.delegate = self
+       photoCollView.delegate = self
+       photoCollView.dataSource = self
+        
+       //Add the Pin to Map and Center the Pin
+        let tempAnnotation : MKPointAnnotation = addAnnotationToMap(lon: Common.shared.currentPin!.lon, lat: Common.shared.currentPin!.lat)
+        mapView.setCenter(tempAnnotation.coordinate, animated: false)
         
         //Load the Pins
         do {
@@ -48,60 +58,55 @@ class PhotoViewController : UICollectionViewController, NSFetchedResultsControll
         }
     }
 
-    
-}
 
-// MARK: - UICollectionViewDataSource
-extension PhotoViewController {
-    //1
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    //2
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    //CollectionView Data Souce Implementation
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (frcPin.fetchedObjects?.count)!
     }
     
-    //3
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = UIColor.black
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier, for: indexPath) as! FlickrImageCell
         
-        // Configure the cell
+        let photo : Photo = frcPin.object(at: indexPath)
+        if let data : NSData = photo.image {
+           cell.FlickrImage.image = UIImage(data: data as Data)
+        } else {
+            loadImage(url: URL(string: photo.url!)!, indexPath: indexPath, cell: cell)
+        }
         
-        
-        
+        //cell.backgroundColor = UIColor.black
         return cell
     }
-}
 
-
-extension PhotoViewController : UICollectionViewDelegateFlowLayout {
-    //1
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //2
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
+    func addAnnotationToMap(lon: Double, lat: Double) -> MKPointAnnotation {
+        var newCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: lon)
         
-        return CGSize(width: widthPerItem, height: widthPerItem)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = newCoordinates
+        self.mapView.addAnnotation(annotation)
+        return annotation
     }
     
-    //3
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        insetForSectionAt section: Int) -> UIEdgeInsets {
-        return sectionInsets
+    
+    func loadImage(url: URL, indexPath: IndexPath, cell: FlickrImageCell) {
+        cell.actCell.startAnimating()
+        let downloadTask:URLSessionDownloadTask =
+            URLSession.shared.downloadTask(with: url)
+            { (url, urlResponse, error) in
+                
+                let photo = self.frcPin.object(at: indexPath)
+                
+                do {
+                    try photo.image = Data(contentsOf: URL(string: photo.url!)!) as NSData?
+                    cell.FlickrImage.image = UIImage(data: photo.image as! Data)
+                } catch {
+                    print("Unable to Download \(photo.url)")
+                }
+                cell.actCell.stopAnimating()
+            }
+        downloadTask.resume()
     }
     
-    // 4
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
-    }
 }
 

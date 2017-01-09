@@ -10,9 +10,10 @@ import Foundation
 
 struct selection {
     var selectedPin : Pin
+    var test : String
 }
 
 class Common {
     static let shared = Common()
-    var currentPin : selection?
+    var currentPin : Pin?
 }

@@ -104,16 +104,14 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
             print(error)
         }
         
+        //Transition to the PhotoViewController
         for newPin in (frcPin.fetchedObjects)! {
             //Set the Current Pin selection
-            Common.shared.currentPin?.selectedPin = newPin
+            Common.shared.currentPin = newPin
             performSegue(withIdentifier: "photoCollection", sender: self)
+            mapView.deselectAnnotation(view.annotation, animated: false)
             return
         }
-            
-        
-        
-        //Transition to the PhotoViewController
         
     }
     
@@ -149,7 +147,7 @@ class ViewController: UIViewController, MKMapViewDelegate,UIGestureRecognizerDel
                    return
                 }
                 for photo in data! {
-                    let newPhoto = Photo(id: photo["id"] as! String, farmId: "\(photo["farm"])" as! String, secret: photo["secret"] as! String, serverId: photo["server"] as! String, title: photo["title"] as! String, context: self.sharedContext)
+                    let newPhoto = Photo(id: photo["id"] as! String, farmId: "\(photo["farm"]!)" as! String, secret: photo["secret"] as! String, serverId: photo["server"] as! String, title: photo["title"] as! String, context: self.sharedContext)
 
                     //Add new photo to pin
                     newPin.addToPhoto(newPhoto)
