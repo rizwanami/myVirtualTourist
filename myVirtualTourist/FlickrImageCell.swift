@@ -8,12 +8,26 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-class FlickrImageCell: UICollectionViewCell {
+class FlickrImageCell: UICollectionViewCell, NSFetchedResultsControllerDelegate{
+    
+    var myPhoto : Photo?
     
     @IBOutlet var FlickrImage: UIImageView!
     
     @IBOutlet var actCell: UIActivityIndicatorView!
+    
+    @IBOutlet var ImageButton: UIButton!
+    
+    @IBAction func btnActionImage(_ sender: AnyObject) {
+        //Delete the Image
+        let mocMain : CoreDataStackManager = CoreDataStackManager.sharedInstance()
+        if let myPhoto = myPhoto {
+            mocMain.managedObjectContext?.delete(myPhoto)
+            mocMain.saveContext()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -13,15 +13,17 @@ import MapKit
 
 
 class PhotoViewController : UIViewController,UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, MKMapViewDelegate {
+    
 
     @IBOutlet var mapView: MKMapView!
     @IBOutlet var photoCollView: UICollectionView!
     
     @IBOutlet var cellActivity: UIActivityIndicatorView!
+    var cellImage = ""
     let reuseIdentifier = "collectionViewCell"
     
-    fileprivate let itemsPerRow: CGFloat = 3
-    fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    //fileprivate let itemsPerRow: CGFloat = 3
+   // fileprivate let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
 
     
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext!
@@ -34,7 +36,7 @@ class PhotoViewController : UIViewController,UICollectionViewDataSource, UIColle
         fetchRequest.sortDescriptors = []
         
         fetchRequest.predicate = NSPredicate(format: "pin == %@", myPin!)
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
+        let fetchedResultsController = NSFetchedResultsController<Photo>(fetchRequest: fetchRequest, managedObjectContext: self.sharedContext, sectionNameKeyPath: nil, cacheName: nil)
         fetchedResultsController.delegate = self
         
         return fetchedResultsController
@@ -50,6 +52,8 @@ class PhotoViewController : UIViewController,UICollectionViewDataSource, UIColle
         let tempAnnotation : MKPointAnnotation = addAnnotationToMap(lon: Common.shared.currentPin!.lon, lat: Common.shared.currentPin!.lat)
         mapView.setCenter(tempAnnotation.coordinate, animated: false)
         
+        frcPin.delegate = self
+        
         //Load the Pins
         do {
             try frcPin.performFetch()
@@ -58,10 +62,19 @@ class PhotoViewController : UIViewController,UICollectionViewDataSource, UIColle
         }
     }
 
+    @IBAction func NewCollection(_ sender: AnyObject) {
+          //Erase all photos from the Pin
+        if let myPin = Common.shared.currentPin {
+                let client = FlickrClient.sharedInstance()
+                myPin.removeFromPhoto((myPin.photo)!)
+                client.addPhotoToPin(newPin: myPin)
+            
+        }
+    }
 
     //CollectionView Data Souce Implementation
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (frcPin.fetchedObjects?.count)!
+            return (frcPin.fetchedObjects?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -71,6 +84,7 @@ class PhotoViewController : UIViewController,UICollectionViewDataSource, UIColle
         let photo : Photo = frcPin.object(at: indexPath)
         if let data : NSData = photo.image {
            cell.FlickrImage.image = UIImage(data: data as Data)
+           cell.myPhoto = photo
         } else {
             loadImage(url: URL(string: photo.url!)!, indexPath: indexPath, cell: cell)
         }
@@ -78,6 +92,7 @@ class PhotoViewController : UIViewController,UICollectionViewDataSource, UIColle
         //cell.backgroundColor = UIColor.black
         return cell
     }
+    
 
     func addAnnotationToMap(lon: Double, lat: Double) -> MKPointAnnotation {
         var newCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: lon)
@@ -100,12 +115,37 @@ class PhotoViewController : UIViewController,UICollectionViewDataSource, UIColle
                 do {
                     try photo.image = Data(contentsOf: URL(string: photo.url!)!) as NSData?
                     cell.FlickrImage.image = UIImage(data: photo.image as! Data)
+                    cell.myPhoto = photo
                 } catch {
                     print("Unable to Download \(photo.url)")
                 }
                 cell.actCell.stopAnimating()
             }
         downloadTask.resume()
+    }
+    
+    
+    //CollectionView Refresh
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch (type) {
+        case .insert:
+            if let indexPath = newIndexPath {
+                photoCollView.insertItems(at: [indexPath as IndexPath])
+            }
+            break;
+        case .delete:
+            if let indexPath = indexPath {
+                photoCollView.deleteItems(at: [indexPath as IndexPath])
+            }
+            break;
+        case .update:
+            if let indexPath = indexPath {
+                photoCollView.reloadItems(at: [indexPath])
+            }
+            break;
+        case .move:
+            break;
+        }
     }
     
 }

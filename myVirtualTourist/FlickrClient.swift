@@ -89,6 +89,26 @@ class FlickrClient {
     func getSearchURL(lon: Double, lat: Double) {
         
     }
+    
+    //Get Photos for Pin
+    func addPhotoToPin(newPin : Pin) {
+        self.FetchPhotosForPin(pin: newPin) {
+            (data, error) in
+            if error != nil {
+                print("error fetching the Photos")
+                return
+            }
+            for photo in data! {
+                let newPhoto = Photo(id: photo["id"] as! String, farmId: "\(photo["farm"])" as! String, secret: photo["secret"] as! String, serverId: photo["server"] as! String, title: photo["title"] as! String, context: CoreDataStackManager.sharedInstance().managedObjectContext!)
+    
+                //Add new photo to pin
+                newPin.addToPhoto(newPhoto)
+            }
+            //Save Photos in Pin
+            CoreDataStackManager.sharedInstance().saveContext()
+        }
+    }
+    
 
     
 }

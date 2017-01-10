@@ -50,12 +50,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-OX-KT7">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Cik-OX-KT7">
+                                <frame key="frameInset" width="1000" height="1000"/>
                                 <connections>
                                     <outlet property="delegate" destination="mie-CE-fqe" id="Imu-tc-WlA"/>
                                 </connections>
                             </mapView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jCp-U9-Bpp">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jCp-U9-Bpp">
+                                <frame key="frameInset" minX="16" minY="144" width="343" height="480"/>
                                 <color key="backgroundColor" red="0.58055763090000001" green="0.91886561879999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wzd-6x-pBu">
                                     <size key="itemSize" width="111" height="108"/>
@@ -79,10 +81,18 @@
                                                     <frame key="frameInset" minY="8" width="111" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGz-az-LHn">
+                                                    <frame key="frameInset" minX="8" minY="8" width="95" height="85"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="btnActionImage:" destination="LAu-Jf-eUQ" eventType="touchUpInside" id="i6u-l6-1T0"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <connections>
                                             <outlet property="FlickrImage" destination="Piy-3d-dDF" id="YAQ-8x-njp"/>
+                                            <outlet property="ImageButton" destination="hGz-az-LHn" id="Jaa-HO-xpm"/>
                                             <outlet property="actCell" destination="ByX-tp-1yh" id="asY-bs-a2c"/>
                                         </connections>
                                     </collectionViewCell>
@@ -91,6 +101,14 @@
                                     <outlet property="delegate" destination="mie-CE-fqe" id="S1S-vM-oHe"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jf-uA-4Q8">
+                                <frame key="frameInset" minX="16" minY="623" width="343" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="NewCollection:" destination="Z8q-tk-w5u" eventType="touchUpInside" id="6en-et-mJa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
