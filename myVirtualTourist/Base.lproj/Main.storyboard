@@ -106,7 +106,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="New Collection"/>
                                 <connections>
-                                    <action selector="NewCollection:" destination="Z8q-tk-w5u" eventType="touchUpInside" id="6en-et-mJa"/>
+                                    <action selector="NewCollection:" destination="Z8q-tk-w5u" eventType="touchUpInside" id="rOp-aw-wwc"/>
                                 </connections>
                             </button>
                         </subviews>

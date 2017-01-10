@@ -2,12 +2,13 @@
 //  Pin+CoreDataProperties.swift
 //  myVirtualTourist
 //
-//  Created by Mohammed Ibrahim on 1/8/17.
+//  Created by Mohammed Ibrahim on 1/9/17.
 //  Copyright © 2017 myw. All rights reserved.
 //
 
 import Foundation
 import CoreData
+
 
 extension Pin {
 

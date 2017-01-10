@@ -8,7 +8,7 @@
         <attribute name="secret" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="serverId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pin" maxCount="1" deletionRule="No Action" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
+        <relationship name="pin" maxCount="1" deletionRule="Nullify" destinationEntity="Pin" inverseName="photo" inverseEntity="Pin" syncable="YES"/>
     </entity>
     <entity name="Pin" representedClassName=".Pin" syncable="YES">
         <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -17,7 +17,7 @@
         <relationship name="photo" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="pin" inverseEntity="Photo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Photo" positionX="160" positionY="-594" width="128" height="163"/>
-        <element name="Pin" positionX="-63" positionY="-612" width="128" height="103"/>
+        <element name="Photo" positionX="160" positionY="-594" width="128" height="165"/>
+        <element name="Pin" positionX="-63" positionY="-612" width="128" height="105"/>
     </elements>
 </model>
